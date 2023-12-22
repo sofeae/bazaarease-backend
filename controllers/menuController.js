@@ -32,7 +32,7 @@ const createMenu = async (req, res) => {
   console.log("Creating Menu");
   console.log(req.body);
   const { name, desc, price } = req.body;
-  const image = req.file.filename;
+  const image = req.file.key;
 
   let emptyFields = [];
 
@@ -95,7 +95,7 @@ const updateMenu = async (req, res) => {
     !(typeof req.file == "undefined")
       ? {
           ...req.body,
-          image: req.file.filename,
+          image: req.file.key,
         }
       : {
           ...req.body,
