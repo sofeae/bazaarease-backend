@@ -18,6 +18,10 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  currentQueue: {
+    type: Number,
+    default: 0
+  }
 });
 
 // static signup method

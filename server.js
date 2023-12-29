@@ -5,10 +5,8 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const menuRoutes = require("./routes/menus");
 const userRoutes = require("./routes/user");
-const menu2Routes = require("./routes/menus2");
 const customerRoutes = require("./routes/customer");
-// const customerRoutes = require('./routes/customer')
-// const multer = require ('multer')
+const orderRoutes = require("./routes/orderRoutes");
 
 // express app
 const app = express();
@@ -26,9 +24,8 @@ app.use((req, res, next) => {
 // routes
 app.use("/api/menus", menuRoutes);
 app.use("/api/customer", customerRoutes);
-// app.use("/api/menus2", menu2Routes);
 app.use("/api/user", userRoutes);
-// app.use('/api/customer', customerRoutes)
+app.use("/api/order", orderRoutes);
 
 // connect to db
 mongoose
