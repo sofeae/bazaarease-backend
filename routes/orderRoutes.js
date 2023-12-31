@@ -11,7 +11,7 @@ const requireAuth = require("../middleware/requireAuth");
 const router = express.Router();
 
 // require auth for all menu routes
-// router.use(requireAuth)
+router.use(requireAuth)
 
 // GET all orders
 router.get("/", getOrders);

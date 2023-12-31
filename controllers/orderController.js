@@ -8,7 +8,11 @@ const getOrders = async (req, res) => {
 
   const orders = await Order.find({ user_id }).sort({ createdAt: -1 });
 
-  res.status(200).json(orders);
+  if (!orders) {
+    return res.status(404).json({ error: "No orders" });
+  }
+
+ return res.status(200).json(orders);
 };
 
 // get a single order
