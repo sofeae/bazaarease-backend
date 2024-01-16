@@ -15,6 +15,36 @@ const getOrders = async (req, res) => {
  return res.status(200).json(orders);
 };
 
+//get Completed Orders
+const getCompletedOrders = async (req,res) =>{
+  const user_id = req.user._id;
+  const orders = await Order.find({ user_id })
+  .where('status')
+  .equals(true)
+  .sort({ createdAt: -1 });
+
+  console.log("completed Orders",orders)
+  if (!orders) {
+    return res.status(404).json({ error: "No orders" });
+  }
+
+ return res.status(200).json(orders);
+}
+
+//get Incompleted Orders
+const getIncompletedOrders = async (req,res) =>{
+  const user_id = req.user._id;
+  const orders = await Order.find({ user_id })
+  .where('status')
+  .equals(false)
+  .sort({ createdAt: -1 });
+  if (!orders) {
+    return res.status(404).json({ error: "No orders" });
+  }
+
+ return res.status(200).json(orders);
+}
+
 // get a single order
 const getOrder = async (req, res) => {
   const { id } = req.params;
@@ -107,15 +137,24 @@ const deleteOrder = async (req, res) => {
 // update a order
 const updateOrder = async (req, res) => {
   const { id } = req.params;
+  const {status} = req.body
+  console.log("Hello",req.body);
+  let newStatus;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such order" });
   }
 
+  if(status == true)
+  newStatus = true;
+
+  else
+  newStatus = false;
+
   const order = await Order.findOneAndUpdate(
     { _id: id },
     {
-      ...req.body,
+      status:newStatus,
     }
   );
 
@@ -132,4 +171,6 @@ module.exports = {
   createOrder,
   deleteOrder,
   updateOrder,
+  getCompletedOrders,
+  getIncompletedOrders,
 };

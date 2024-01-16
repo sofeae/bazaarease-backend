@@ -5,6 +5,8 @@ const {
   deleteOrder,
   updateOrder,
   createOrder,
+  getCompletedOrders,
+  getIncompletedOrders,
 } = require("../controllers/orderController");
 const requireAuth = require("../middleware/requireAuth");
 
@@ -15,6 +17,13 @@ const router = express.Router();
 
 // GET all orders
 router.get("/", requireAuth, getOrders);
+
+
+// GET Incompleted orders
+router.get("/incompleted", requireAuth, getIncompletedOrders);
+
+// GET Completed orders
+router.get("/completed", requireAuth, getCompletedOrders);
 
 //GET a single order
 router.get("/:id", requireAuth, getOrder);
