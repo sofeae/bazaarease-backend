@@ -45,9 +45,7 @@ const createMenu = async (req, res) => {
   if (!price) {
     emptyFields.push("price");
   }
-  // if (!stock) {
-  //   emptyFields.push('stock')
-  // }
+
   if (emptyFields.length > 0) {
     return res
       .status(400)
@@ -57,12 +55,19 @@ const createMenu = async (req, res) => {
   // add doc to db
   try {
     const user_id = req.user._id;
-    const menu = await Menu.create({ name, desc, price, image, user_id });
+    const menu = await Menu.create({
+      name,
+      desc,
+      price,
+      image,
+      user_id,
+      availability: true, // Set the default value for availability
+    });
     res.status(200).json(menu);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
-};
+}; 
 
 // delete a menu
 const deleteMenu = async (req, res) => {
@@ -108,7 +113,7 @@ const updateMenu = async (req, res) => {
 
   res.status(200).json(menu);
 };
-
+ 
 module.exports = {
   getMenus,
   getMenu,

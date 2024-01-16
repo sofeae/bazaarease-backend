@@ -23,6 +23,10 @@ const menuSchema = new Schema(
       type: String,
       required: true,
     },
+    availability: {
+      type: Boolean,
+      default: true, // You can set a default value if needed
+    },
   },
   { timestamps: true }
 );

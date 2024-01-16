@@ -15,8 +15,8 @@ const orderSchema = new Schema(
       type: Number,
     },
     status: {
-      type: String,
-      default: "INCOMPLETE",
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }

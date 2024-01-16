@@ -13,16 +13,6 @@ const requireAuth = require("../middleware/requireAuth");
 
 const router = express.Router();
 
-//Multer untuk upload image
-// const fileStorageEngine = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, "./images");
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, Date.now() + "--" + file.originalname);
-//   },
-// });
-
 const s3 = new S3Client({
   credentials: {
     accessKeyId: "633585615a9f56f9278d5b923f358c88",

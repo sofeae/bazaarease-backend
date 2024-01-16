@@ -68,12 +68,17 @@ const createOrder = async (req, res) => {
     );
     const { currentQueue } = await userModel.findById(sellerId, "currentQueue");
     console.log(currentQueue);
+    
+    // Set the initial status to false
     const order = await Order.create({
       user_id: sellerId,
       cart: cart,
       queueNum: currentQueue,
+      status: false,
     });
+    
     console.log("Order Created");
+    console.log("Order Status:", order.status); // Log the status here
     return res
       .status(200)
       .json({ paymentStatus: "paid", queueNum: currentQueue });
