@@ -20,6 +20,7 @@ const loginUser = async (req, res) => {
       email,
       token,
       businessName: user.businessName,
+      storeStatus: user.storeStatus // Include storeStatus in the response
     };
 
     res.status(200).json(obj);
@@ -38,7 +39,11 @@ const signupUser = async (req, res) => {
     // create a token
     const token = createToken(user._id);
 
-    res.status(200).json({ email, token });
+    res.status(200).json({
+      email,
+      token,
+      storeStatus: user.storeStatus // Include storeStatus in the response
+    });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

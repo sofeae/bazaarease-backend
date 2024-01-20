@@ -21,6 +21,10 @@ const userSchema = new Schema({
   currentQueue: {
     type: Number,
     default: 0
+  },
+  storeStatus: {
+    type: Boolean,
+    default: true // You can change the default value based on your requirement
   }
 });
 
