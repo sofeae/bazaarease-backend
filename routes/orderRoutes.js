@@ -7,6 +7,7 @@ const {
   createOrder,
   getCompletedOrders,
   getIncompletedOrders,
+  getStatus,
 } = require("../controllers/orderController");
 const requireAuth = require("../middleware/requireAuth");
 
@@ -26,7 +27,10 @@ router.get("/incompleted", requireAuth, getIncompletedOrders);
 router.get("/completed", requireAuth, getCompletedOrders);
 
 //GET a single order
-router.get("/:id", requireAuth, getOrder);
+// router.get("/", requireAuth, getOrder);
+
+//GET a single order status
+router.get("/:id", getStatus);
 
 //POST creata a order
 router.post("/", createOrder);

@@ -45,7 +45,7 @@ const createMenu = async (req, res) => {
   if (!price) {
     emptyFields.push("price");
   }
-
+  
   if (emptyFields.length > 0) {
     return res
       .status(400)
@@ -100,7 +100,7 @@ const updateMenu = async (req, res) => {
     !(typeof req.file == "undefined")
       ? {
           ...req.body,
-          image: req.file.key,
+          image: req.file.key, 
         }
       : {
           ...req.body,

@@ -48,7 +48,7 @@ userSchema.statics.signup = async function (email, password, businessName) {
 
   const user = await this.create({ email, password: hash, businessName });
 
-  return user;
+  return user; 
 };
 
 // static login method

@@ -58,7 +58,24 @@ const getOrder = async (req, res) => {
   res.status(200).json(order);
 };
 
-// customer create an order
+// get a single status
+const getStatus = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such order" });
+  }
+
+  const order = await Order.findById(id);
+
+  if (!order) {
+    return res.status(404).json({ error: "No such order" });
+  }
+
+  res.status(200).json({status:order.status});
+};
+
+
 // customer create an order
 const createOrder = async (req, res) => {
   console.log("Creating Order");
@@ -110,7 +127,7 @@ const createOrder = async (req, res) => {
 
     return res
       .status(200)
-      .json({ paymentStatus: "paid", queueNum: currentQueue });
+      .json({ paymentStatus: "paid", queueNum: currentQueue, order: order });
   } catch (error) {
     return res.status(400).json({ error: error.message });
   }
@@ -170,4 +187,5 @@ module.exports = {
   updateOrder,
   getCompletedOrders,
   getIncompletedOrders,
+  getStatus,
 };
