@@ -182,7 +182,7 @@ const updateOrder = async (req, res) => {
 module.exports = {
   getOrders,
   getOrder,
-  createOrder,
+  createOrder, 
   deleteOrder,
   updateOrder,
   getCompletedOrders,
